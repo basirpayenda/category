@@ -1,0 +1,45 @@
+{% extends 'tutorial/base.html' %}
+
+{% block style %}
+<style>
+    .card:hover {
+        cursor: pointer;
+        box-shadow: 0 0 7px #f3f3f3;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+<div class="collection">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% for sub_cat in matching_series %}
+    {% for sub_sub_cat in sub_cat.tutorial_set.all %}
+    {{ sub_sub_cat.tutorial_title }}
+    {% endfor %}
+    {% endfor %}
+
+    <div class="d-flex flex-wrap">
+        {% for tut, partone in part_ones.items %}
+
+        <div class="col s12 m6 l4">
+            <a href="{{partone}}" , style="color:#000">
+                <div class="card hoverable">
+                    <div class="card-content">
+                        <div class="card-title">{{tut.tutorial_series}}</div>
+                        <!--<p style="font-size:70%">Published {{tut.tutorial_published}}</p>-->
+                        <p>{{tut.series_summary}}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endblock content %}

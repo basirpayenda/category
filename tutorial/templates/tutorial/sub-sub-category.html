@@ -1,0 +1,32 @@
+{% extends 'tutorial/base.html' %}
+
+{% block style %}
+<style>
+    .card:hover {
+        cursor: pointer;
+        box-shadow: 0 0 7px #f3f3f3;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+
+<div class="row">
+    {% for sub_cat in matching_series %}
+    <div class="col-sm-12 col-md-6 col-lg-4 p-3">
+        <div class="card hoverable">
+            <div class="card-body">
+                <h5>{{ sub_cat.tutorial_title }}</h5>
+                <p>{{ sub_cat.snippet|safe }}</p>
+                <a
+                    href="{% url 'tutorial:tutorial_detail' sub_cat.tutorial_series.series_maincategory.category_slug sub_cat.tutorial_series sub_cat.tutorial_slug %}">read
+                    more</a>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
+

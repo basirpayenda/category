@@ -1,0 +1,35 @@
+{% extends 'tutorial/base.html' %}
+
+{% block style %}
+<style>
+    .card:hover {
+        cursor: pointer;
+        box-shadow: 0 0 7px #f3f3f3;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+<div class="collection">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="d-flex flex-wrap">
+
+        {% for tutorial in tutorials %}
+        <div class="card col-lg-3 col-md-4 col-sm-12 m-4" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ tutorial.category_title }}</h5>
+                <p class="card-text">{{ tutorial.category_summary }}</p>
+                <a class='card-link' href="{% url 'tutorial:single_slug' tutorial.category_slug %}">
+                    read more</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endblock content %}

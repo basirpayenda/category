@@ -1,0 +1,29 @@
+{% extends 'tutorial/base.html' %}
+
+{% block style %}
+<style>
+    .card:hover {
+        cursor: pointer;
+        box-shadow: 0 0 7px #f3f3f3;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+
+<div class="d-flex flex-wrap">
+    {% for sub_cat in matching_series %}
+
+    <div class="col s12 m6 l4 p-3">
+
+        <div class="card hoverable">
+            <div class="card-body">
+                <h5>{{ sub_cat.section_title }}</h5>
+                <p>{{ sub_cat.snippet|safe }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
