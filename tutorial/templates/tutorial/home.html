@@ -6,6 +6,10 @@
         cursor: pointer;
         box-shadow: 0 0 7px #f3f3f3;
     }
+    .card-link:hover{
+        text-decoration: underline;
+        color: #f3f3f3;
+    }
 </style>
 {% endblock style %}
 
@@ -23,10 +27,19 @@
         {% for tutorial in tutorials %}
         <div class="card col-lg-3 col-md-4 col-sm-12 m-4" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">{{ tutorial.category_title }}</h5>
-                <p class="card-text">{{ tutorial.category_summary }}</p>
+                
                 <a class='card-link' href="{% url 'tutorial:single_slug' tutorial.category_slug %}">
-                    read more</a>
+                    <h5 class="card-title bg-success p-4 text-white" style="border-radius: 8px;">{{ tutorial.category_title }}</h5>
+                </a>
+                <hr>
+                {% for tut in tutorial.tutorialseries_set.all %}
+                    <div class="p-2 mb-1 text-white" style="border-radius: 5px;background-color: dodgerblue;">{{ tut.series_title }}</div>
+                        {% for subtut in tut.tutorials.all %}  # related_name =  'tutorials'
+                            <div class="p-1 text-white ml-3 w-85 mb-1" style="border-radius: 4px; background-color: darkgoldenrod;">
+                                {{ subtut.tutorial_title }}
+                            </div>
+                        {% endfor %}
+                {% endfor %}
             </div>
         </div>
         {% endfor %}

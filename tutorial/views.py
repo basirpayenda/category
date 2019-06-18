@@ -5,8 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 def series_view(request, cat_slug):
-    matching_series = TutorialSeries.objects.filter(
-        series_maincategory__category_slug=cat_slug)   # DONE
+    matching_series = TutorialSeries.objects.filter(series_maincategory__category_slug=cat_slug)  
 
     return render(request, 'tutorial/sub-category.html', context={
         "matching_series": matching_series,
@@ -14,8 +13,7 @@ def series_view(request, cat_slug):
 
 
 def tutorial_view(request, cat_slug, series_slug):
-    matching_series = Tutorial.objects.filter(
-        tutorial_series__series_slug=series_slug)   # DONE
+    matching_series = Tutorial.objects.filter(tutorial_series__series_slug=series_slug)  
 
     return render(request, 'tutorial/sub-sub-category.html', context={
         "matching_series": matching_series,

@@ -23,8 +23,7 @@ class TutorialCategory(models.Model):
 
 class TutorialSeries(models.Model):
     series_title = models.CharField(max_length=200)
-    series_maincategory = models.ForeignKey(
-        TutorialCategory, default=1, on_delete=models.SET_DEFAULT)
+    series_maincategory = models.ForeignKey(TutorialCategory, default=1, on_delete=models.SET_DEFAULT)
     series_summary = models.CharField(max_length=200)
     series_slug = models.SlugField(default=1, blank=True)
 
@@ -38,10 +37,8 @@ class TutorialSeries(models.Model):
 class Tutorial(models.Model):
     tutorial_title = models.CharField(max_length=150)
     tutorial_content = models.TextField()
-    tutorial_published = models.DateTimeField(
-        "date Published", default=datetime.now())
-    tutorial_series = models.ForeignKey(
-        TutorialSeries, default=1, on_delete=models.SET_DEFAULT)
+    tutorial_published = models.DateTimeField("date Published", default=datetime.now())
+    tutorial_series = models.ForeignKey(TutorialSeries, default=1, on_delete=models.SET_DEFAULT, related_name='tutorials')
     tutorial_slug = models.SlugField(default=1, blank=True)
 
     def snippet(self):
@@ -61,10 +58,8 @@ class Tutorial(models.Model):
 class Section(models.Model):
     section_title = models.CharField(max_length=150)
     section_content = models.TextField()
-    section_published = models.DateTimeField(
-        "date Published", default=datetime.now())
-    section_tutorial = models.ForeignKey(
-        TutorialSeries, default=1, on_delete=models.SET_DEFAULT)
+    section_published = models.DateTimeField("date Published", default=datetime.now())
+    section_tutorial = models.ForeignKey(Tutorial, default=1, on_delete=models.SET_DEFAULT)
     section_slug = models.SlugField(default=1, blank=True)
 
     def snippet(self):
